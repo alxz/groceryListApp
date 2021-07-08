@@ -3,11 +3,27 @@
  */
 // var app = angular.module('myApp', []);
 // var app = angular.module('tutorialApp', ["tutorialCtrlModule"]);
-var app = angular.module('groceryListApp', []);
+var app = angular.module('groceryListApp', [ "ngRoute" ]);
 
 app.config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
 }]);
+
+app.config( function ($routeProvider) {
+    $routeProvider
+        .when("/", {
+            templateUrl: "views/groceryList.html",
+            controller: "GroceryListItemsController"
+        })
+        .when("/addItem", {
+            templateUrl: "views/addItem.html",
+            controller: "GroceryListItemsController"
+        })
+        .otherwise({
+            redirectTo: "/"
+        })
+});
+
 app.controller("HomeController", ["$scope", function ($scope) {
     $scope.appTitle = "Grocery List";
 }]);
